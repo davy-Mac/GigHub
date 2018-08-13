@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201808130052105_GigAndGenre.Designer.cs">
       <DependentUpon>201808130052105_GigAndGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808130105357_OverrideConventionsForGigsAndGenres.cs" />
+    <Compile Include="Migrations\201808130105357_OverrideConventionsForGigsAndGenres.Designer.cs">
+      <DependentUpon>201808130105357_OverrideConventionsForGigsAndGenres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808130052105_GigAndGenre.resx">
       <DependentUpon>201808130052105_GigAndGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808130105357_OverrideConventionsForGigsAndGenres.resx">
+      <DependentUpon>201808130105357_OverrideConventionsForGigsAndGenres.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
