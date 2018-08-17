@@ -28,6 +28,7 @@ namespace GigHub.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel viewModel)  // this will be the view that will be posted when we hit the create action
         {
             if (!ModelState.IsValid)
