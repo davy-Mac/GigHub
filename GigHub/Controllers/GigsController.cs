@@ -30,10 +30,16 @@ namespace GigHub.Controllers
         [HttpPost]
         public ActionResult Create(GigFormViewModel viewModel)  // this will be the view that will be posted when we hit the create action
         {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = _context.Genres.ToList();
+                return View("Create", viewModel);
+            }
+
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
-                DateTime = viewModel.DateTime, // parses the DateTime object and formats it using 2 placeholders Date & Time
+                DateTime = viewModel.GetDateTime(), // parses the DateTime object and formats it using 2 placeholders Date & Time
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };
