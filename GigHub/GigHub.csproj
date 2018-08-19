@@ -222,18 +222,30 @@
     <Compile Include="Migrations\201808160645244_AddForeignKeyPropertiesToGigModel.Designer.cs">
       <DependentUpon>201808160645244_AddForeignKeyPropertiesToGigModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808170747012_AddNameToApplicationUserClass.cs" />
+    <Compile Include="Migrations\201808170747012_AddNameToApplicationUserClass.Designer.cs">
+      <DependentUpon>201808170747012_AddNameToApplicationUserClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\ForgotViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
+    <Compile Include="ViewModels\VerifyCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -327,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808160645244_AddForeignKeyPropertiesToGigModel.resx">
       <DependentUpon>201808160645244_AddForeignKeyPropertiesToGigModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808170747012_AddNameToApplicationUserClass.resx">
+      <DependentUpon>201808170747012_AddNameToApplicationUserClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
