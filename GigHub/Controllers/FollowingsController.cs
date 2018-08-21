@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace GigHub.Controllers
 {
+    [Authorize]
     public class FollowingsController : ApiController
     {
         private ApplicationDbContext _context;
