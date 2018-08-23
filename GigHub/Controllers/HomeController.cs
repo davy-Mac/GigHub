@@ -21,7 +21,7 @@ namespace GigHub.Controllers
             var upcomingGigs = _context.Gigs //eager loading using a lambda expression instead of passing the string path req. System.Date.Entity
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
-                .Where(g => g.DateTime > DateTime.Now);
+                .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);
 
             var viewModel = new GigsViewModel
             {
