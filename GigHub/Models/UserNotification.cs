@@ -18,7 +18,7 @@ namespace GigHub.Models
 
         public Notification Notification { get; private set; }  // navigation property, "private" so it's always valid cannot be changed once set
 
-        public bool IsRead { get; set; }
+        public bool IsRead { get; private set; }
 
         protected UserNotification() // default constructor for EF
         {
@@ -34,6 +34,11 @@ namespace GigHub.Models
 
             User = user;
             Notification = notification;
+        }
+
+        public void Read() // sets the IsRead state to Read, true
+        {
+            IsRead = true;
         }
     }
 }

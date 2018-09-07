@@ -92,6 +92,14 @@
                     },
                     placement: "bottom",
                     template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+
+                }).on("shown.bs.popover", function() {  /*this method consumes the api that changes the IsRead status to true*/
+                    $.post("/api/notifications/markAsRead")
+                        .done(function() {
+                            $(".js-notifications-count")  /*this is the notification badge*/
+                                .text("")                 /*cleares the text in the notifications badge*/
+                                .addClass("hide");      /*hides the notifications badge*/
+                        });
                 });
             });
         });

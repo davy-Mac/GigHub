@@ -55,5 +55,20 @@ namespace GigHub.Controllers.Api
             //    Type = n.Type
             //});
         }
+
+        [HttpPost]
+        public IHttpActionResult MarkAsRead() // method to mark notifications as read
+        {
+            var userId = User.Identity.GetUserId(); // gets the current logged in user 
+            var notifications = _context.UserNotifications //gets all the notifications of a particular user
+                .Where(un => un.UserId == userId && !un.IsRead) // filters the notifications by the logged in user and not Is NOT Read
+                .ToList(); // immediately executes the query 
+
+            notifications.ForEach(n=>n.Read()); // iterates over notifications to set them as read
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
