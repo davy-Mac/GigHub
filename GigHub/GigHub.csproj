@@ -216,6 +216,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AttendancesController.cs" />
     <Compile Include="Controllers\Api\FollowingsController.cs" />
+    <Compile Include="ViewModels\GigDetailsViewModel.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\GigDto.cs" />
     <Compile Include="Controllers\Api\GigsController.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Views\Gigs\GigForm.cshtml" />
     <Content Include="Views\Followees\Index.cshtml" />
     <Content Include="Views\Gigs\Mine.cshtml" />
+    <Content Include="Views\Gigs\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

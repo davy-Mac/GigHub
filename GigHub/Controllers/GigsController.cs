@@ -53,6 +53,12 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
+        [HttpPost]
+        public ActionResult Search(GigsViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Home", new {query = viewModel.SearchTerm});
+        }
+
         [Authorize]
         public ActionResult Create()
         {
@@ -134,6 +140,32 @@ namespace GigHub.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Gigs");
+        }
+
+        public ActionResult Details(int id)  // this action returns a view with the details of the particular gig
+        {
+            var gig = _context.Gigs
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .SingleOrDefault(g => g.Id == id); // to get the gig Artist and Genre with that GigId
+
+            if (gig == null)
+                return HttpNotFound();
+
+            var viewModel = new GigDetailsViewModel {Gig = gig}; // initializes the viewModel
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId(); // gets the Id of the current logged in user
+
+                viewModel.IsAttending = _context.Attendances //to initialize the attendance property and
+                    .Any(a => a.GigId == gig.Id && a.AttendeeId == userId);  //check for matching objects with this criteria
+
+                viewModel.IsFollowing = _context.Followings // to initialize the Following property and
+                    .Any(f => f.FolloweeId == gig.ArtistId && f.FollowerId == userId); // check for matching objects with this criteria
+            }
+
+            return View("Details", viewModel);
         }
     }
 }
