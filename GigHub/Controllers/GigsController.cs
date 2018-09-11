@@ -33,7 +33,7 @@ namespace GigHub.Controllers
         }
 
         [Authorize]
-        public ActionResult Attending()
+        public ActionResult Attending() // loads all Gigs attended by the logged in user
         {
             var userId = User.Identity.GetUserId();
             var gigs = _context.Attendances
@@ -43,11 +43,18 @@ namespace GigHub.Controllers
                 .Include(g => g.Genre)
                 .ToList();
 
-            var viewModel = new GigsViewModel()
+            var attendances = _context.Attendances // loads all the user's attendances 
+                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
+
+            var viewModel = new GigsViewModel() // initializes the GigsViewModel
             {
                 UpcomingGigs = gigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending"
+                Heading = "Gigs I'm Attending",
+                Attendances = attendances
             };
 
             return View("Gigs", viewModel);
