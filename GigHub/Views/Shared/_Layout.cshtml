@@ -1,12 +1,13 @@
-﻿@*<!DOCTYPE html>*@
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,44 +35,42 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-    @*@Scripts.Render("~/bundles/jquery")*@   @*replaced with "~/bundles/lib"*@
+
     @Scripts.Render("~/bundles/lib")
     @Scripts.Render("~/bundles/app")
-    @*@Scripts.Render("~/bundles/bootstrap")*@  @*has been put into bundle*@
     @RenderSection("scripts", required: false)
-<script type="text/x-template" id="notifications-template">
-    <ul class="notifications">
-        <%
-        _.each(notifications, function(notification){
-        if(notification.type == 1) {
-        %>
-            <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D HH:mm") %>.</li>
-        <% }
+    <script type="text/x-template" id="notifications-template">
+        <ul class="notifications">
+            <%
+            _.each(notifications, function(notification){
+            if (notification.type == 1) { %>
+            <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
+            <% }
 
-        else if (notification.type == 2){ @*notification for gig Update*@
-        var changes = [],  @*string array to hold the dateTime and Venue of the gig*@
-        originalValues = [],  @*string array to hold the values*@
-        newValues = []; @*string array to hold the values*@
+            else if (notification.type == 2) { @*notification for gig Update*@
+            var changes = [],   @*string array to hold the dateTime and Venue of the gig*@
+            originalValues = [],    @*string array to hold the values*@
+            newValues = []; @*string array to hold the values*@
 
-        if(notification.originalVenue != notification.gig.venue){
-        changes.push('venue'); @*venue is changed*@
-        originalValues.push(notification.originalVenue);
-        newValues.push(notification.gig.venue);
-        }
+            if (notification.originalVenue != notification.gig.venue) {
+            changes.push('venue');  @*venue is changed*@
+            originalValues.push(notification.originalVenue);
+            newValues.push(notification.gig.venue);
+            }
 
-        if(notification.originalDateTime != notification.gig.dateTime){
-        changes.push('date/time');
-        originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
-        newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
-        }
+            if (notification.originalDateTime != notification.gig.dateTime) {
+            changes.push('date/time');
+            originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
+            newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
+            }
 
-        %>
+            %>
             <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
-        <%
-        }
-        })
-        %>
-    </ul>
+            <%
+            }
+            })
+            %>
+        </ul>
     </script>
     <script>
         $(document).ready(function () {
@@ -87,21 +86,22 @@
                 $(".notifications").popover({
                     html: true,
                     title: "Notifications",
-                    content: function() {
+                    content: function () {
                         var compiled = _.template($("#notifications-template").html());
-                        return compiled({ notifications: notifications});  /*this is the json object*/
+                        return compiled({ notifications: notifications });
                     },
                     placement: "bottom",
                     template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 
-                }).on("shown.bs.popover", function() {  /*this method consumes the api that changes the IsRead status to true*/
+                }).on("shown.bs.popover", function () {
                     $.post("/api/notifications/markAsRead")
-                        .done(function() {
-                            $(".js-notifications-count")  /*this is the notification badge*/
-                                .text("")                 /*cleares the text in the notifications badge*/
-                                .addClass("hide");      /*hides the notifications badge*/
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
                         });
                 });
+
             });
         });
     </script>
