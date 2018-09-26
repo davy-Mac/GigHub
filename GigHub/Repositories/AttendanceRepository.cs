@@ -1,8 +1,7 @@
-﻿using System;
+﻿using GigHub.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using GigHub.Models;
 
 namespace GigHub.Repositories
 {
@@ -15,17 +14,17 @@ namespace GigHub.Repositories
             _context = context;
         }
 
-        public IEnumerable<Attendance> GetFutureAttendances(string userId) // returns a list of attendances
+        public IEnumerable<Attendance> GetFutureAttendances(string userId)
         {
-            return _context.Attendances // loads all the user's attendances 
+            return _context.Attendances
                 .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
                 .ToList();
         }
 
         public Attendance GetAttendance(int gigId, string userId)
         {
-            return _context.Attendances //to initialize the attendance property and
-                .SingleOrDefault(a => a.GigId == gigId && a.AttendeeId == userId);  //check for matching objects with this criteria
+            return _context.Attendances
+                .SingleOrDefault(a => a.GigId == gigId && a.AttendeeId == userId);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using GigHub.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using GigHub.Models;
 
 namespace GigHub.Repositories
 {
@@ -16,9 +15,9 @@ namespace GigHub.Repositories
             _context = context;
         }
 
-        public Gig GetGig(int gigId) // Eager loads the Gig with it's artist and genre
+        public Gig GetGig(int gigId)
         {
-            return _context.Gigs    // to get the gig Artist and Genre with that GigId
+            return _context.Gigs
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
                 .SingleOrDefault(g => g.Id == gigId);
@@ -27,9 +26,9 @@ namespace GigHub.Repositories
         public IEnumerable<Gig> GetUpcomingGigsByArtist(string artistId)
         {
             return _context.Gigs
-                .Where(g => 
-                    g.ArtistId == artistId && 
-                    g.DateTime > DateTime.Now && 
+                .Where(g =>
+                    g.ArtistId == artistId &&
+                    g.DateTime > DateTime.Now &&
                     !g.IsCanceled)
                 .Include(g => g.Genre)
                 .ToList();
@@ -38,11 +37,11 @@ namespace GigHub.Repositories
         public Gig GetGigWithAttendees(int gigId)
         {
             return _context.Gigs
-                .Include(g => g.Attendances.Select(a => a.Attendee)) // Eager loads the attendees
+                .Include(g => g.Attendances.Select(a => a.Attendee))
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public IEnumerable<Gig> GetGigsUserAttending(string userId) //returns a list of gigs
+        public IEnumerable<Gig> GetGigsUserAttending(string userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
