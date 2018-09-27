@@ -9,13 +9,13 @@ namespace GigHub.Controllers
 {
     public class GigsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork; // IUnitOfWork is the interface used to hide _context = ApplicationDbContext
 
-        public GigsController()
+        public GigsController(IUnitOfWork unitOfWork) // injecting IUnitOfWork DEPENDENCY INJECTION REQUIRES A DEPENDENCY INJECTION FRAMEWORK eg. Unity, Ninject
         {
-            _context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(_context);
+            // _context = new ApplicationDbContext(); // removed in line field
+            // _unitOfWork = new UnitOfWork(new ApplicationDbContext());  // initializes _unitOfWork as new ApplicationDbContext
+            _unitOfWork = unitOfWork; // initializes _unitOfWork without invoking ApplicationDbContext
         }
 
         public ActionResult Details(int id)
