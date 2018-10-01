@@ -4,7 +4,7 @@ using System.Linq;
 using GigHub.Core.Models;
 using GigHub.Core.Repositories;
 
-namespace GigHub.Persistence.Repositories
+namespace GigHub.Persistance.Repositories
 {
     public class AttendanceRepository : IAttendanceRepository
     {

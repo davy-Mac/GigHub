@@ -2,7 +2,7 @@
 using GigHub.Core.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace GigHub.Persistence
+namespace GigHub.Persistance
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
