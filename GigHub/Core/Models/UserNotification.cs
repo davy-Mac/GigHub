@@ -6,12 +6,12 @@ namespace GigHub.Core.Models
 {
     public class UserNotification
     {
-        [Key]
-        [Column(Order = 1)]
+        //[Key]
+        //[Column(Order = 1)]// not necessary here, defined in Entity Configurations
         public string UserId { get; private set; } //"private" so it's always valid cannot be changed once set
 
-        [Key]
-        [Column(Order = 2)]
+        //[Key]
+        //[Column(Order = 2)]// not necessary here, defined in Entity Configurations
         public int NotificationId { get; private set; } //"private" so it's always valid cannot be changed once set
 
         public ApplicationUser User { get; private set; } // navigation property, "private" so it's always valid cannot be changed once set

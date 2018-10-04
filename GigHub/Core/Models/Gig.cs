@@ -14,18 +14,18 @@ namespace GigHub.Core.Models
 
         public ApplicationUser Artist { get; set; }
 
-        [Required]
+        //[Required] // not necessary here anymore been defined in Entity Configurations Folder
         public string ArtistId { get; set; }
 
         public DateTime DateTime { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        //[Required]
+        //[StringLength(255)] // not necessary here anymore been defined in Entity Configurations Folder
         public string Venue { get; set; }
 
         public Genre Genre { get; set; }
 
-        [Required]
+        //[Required]
         public byte GenreId { get; set; }
 
         public ICollection<Attendance> Attendances { get; private set; }

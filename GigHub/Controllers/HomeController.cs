@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web.Mvc;
 using GigHub.Core.Models;
 using GigHub.Core.ViewModels;
-using GigHub.Persistance;
-using GigHub.Persistance.Repositories;
+using GigHub.Persistence;
+using GigHub.Persistence.Repositories;
 
 namespace GigHub.Controllers
 {

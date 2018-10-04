@@ -3,7 +3,7 @@ using System.Linq;
 using GigHub.Core.Models;
 using GigHub.Core.Repositories;
 
-namespace GigHub.Persistance.Repositories
+namespace GigHub.Persistence.Repositories
 {
     public class GenreRepository : IGenreRepository
     {

@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
 using GigHub.Core.Models;
+using GigHub.Persistence.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace GigHub.Persistance
+namespace GigHub.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -24,27 +25,22 @@ namespace GigHub.Persistance
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder) // implements fluent API
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Attendance>()
-                .HasRequired(a => a.Gig)
-                .WithMany(g => g.Attendances)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followers)  // An application user has many Followers
-                .WithRequired(f => f.Followee) // has a required Followee
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followees) // An application user has many Followees
-                .WithRequired(f => f.Follower)// has a required Follower 
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<UserNotification>()
-                .HasRequired(n => n.User)  //Each UserNotification has One and Only One User
-                .WithMany(u => u.UserNotifications)  //Each User can have Many UserNotifications
-                .WillCascadeOnDelete(false);  // to avoid deleting more than once
+                                                                                // An application user has many Followers
+                                                                                // has a required Followee
+                                                                                // An application user has many Followees
+                                                                                // has a required Follower
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
+            modelBuilder.Configurations.Add(new AttendanceConfiguration());
+            modelBuilder.Configurations.Add(new FollowingConfiguration());
+            modelBuilder.Configurations.Add(new GenreConfiguration());
+            modelBuilder.Configurations.Add(new GigConfiguration());
+            modelBuilder.Configurations.Add(new NotificationConfiguration());
+                                                                        //Each UserNotification has One and Only One User
+                                                                        //Each User can have Many UserNotifications
+                                                                        // to avoid deleting more than once
+            modelBuilder.Configurations.Add(new UserNotificationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

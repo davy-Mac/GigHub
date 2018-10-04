@@ -1,5 +1,5 @@
 using GigHub.Core.Models;
-using GigHub.Persistance;
+using GigHub.Persistence;
 
 namespace GigHub.Migrations
 {
